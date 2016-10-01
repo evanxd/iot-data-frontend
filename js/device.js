@@ -22,6 +22,18 @@
       options: {
         legend: {
           display: false
+        },
+        responsive: true,
+        scales:{
+          xAxes: [{
+            display: false
+          }],
+          yAxes: [{
+            display: true,
+            ticks: {
+              suggestedMin: 0
+            }
+          }]
         }
       }
     });
