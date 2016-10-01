@@ -1,20 +1,41 @@
 'use strict';
 
 (function() {
+  var DATA_FROM_DB;
+  var editor = ace.edit('editor');
   var params = new URLSearchParams(window.location.search);
   var deviceId = params.get('id');
   $.ajax({
     url: 'http://' + SERVER_ADDRESS + '/devices/' + deviceId + '/data'
   })
   .done(function(data) {
-    drawChart(data);
+    DATA_FROM_DB = data;
+    Object.freeze(DATA_FROM_DB);
+
+    editor.getSession().setMode("ace/mode/javascript");
+    editor.commands.addCommand({
+      bindKey: { mac: 'Command-Z', win: 'Ctrl-Z' },
+      exec: drawChart
+    });
+    drawChart();
   });
 
-  var editor = ace.edit('editor');
-  editor.getSession().setMode("ace/mode/javascript");
+  function drawChart() {
+    var data;
 
-  function drawChart(_data) {
-    var data = convertData(_data);
+    try {
+      var code = editor.getSession().getValue();
+      eval(code);
+      // Clone the array data.
+      data = DATA_FROM_DB.slice(0);
+      data = query(data) || [];
+      window.query = undefined;
+    } catch(err) {
+      alert(err);
+      throw err;
+    }
+
+    data = convertData(data);
     var ctx = document.querySelector('#chart');
     new Chart(ctx, {
       type: 'line',
@@ -42,18 +63,18 @@
     });
   }
 
-  function convertData(_data) {
+  function convertData(data) {
     var date = [];
     var datasets = [];
 
-    if (Array.isArray(_data) && _data[0]) {
-      var keys = Object.keys(_data[0].data);
+    if (Array.isArray(data) && data[0]) {
+      var keys = Object.keys(data[0].data);
 
       keys.forEach(function() {
         datasets.push({ data: [] });
       });
 
-      _data.forEach(function(item) {
+      data.forEach(function(item) {
         date.push(new Date(item.date));
         keys.forEach(function(key, i) {
           datasets[i].data.push(item.data[key]);
