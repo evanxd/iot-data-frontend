@@ -10,6 +10,10 @@
     drawChart(data);
   });
 
+  var editor = ace.edit('editor');
+  editor.setTheme("ace/theme/twilight");
+  editor.getSession().setMode("ace/mode/javascript");
+
   function drawChart(_data) {
     var data = convertData(_data);
     var ctx = document.querySelector('#chart');
