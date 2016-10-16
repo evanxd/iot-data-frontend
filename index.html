@@ -6,7 +6,12 @@
     <title>IoT Data</title>
     <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
     <link rel="stylesheet" href="https://code.getmdl.io/1.2.1/material.blue-pink.min.css">
+    <script defer src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
     <script defer src="https://code.getmdl.io/1.2.1/material.min.js"></script>
+    <script defer src='http://maps.google.com/maps/api/js?sensor=false&libraries=places'></script>
+    <script defer src="js/locationpicker.jquery.min.js"></script>
+    <script defer src="js/config.js"></script>
+    <script defer src="js/index.js"></script>
   </head>
   <body>
     <div class="mdl-layout mdl-js-layout mdl-layout--fixed-header">
@@ -29,7 +34,22 @@
       </div>
 
       <main class="mdl-layout__content">
-        <div class="page-content"></div>
+        <div id="map" style="width: 500px; height: 400px;"></div>
+        <div class="mdl-textfield mdl-js-textfield">
+          <input class="mdl-textfield__input" type="text" id="email">
+          <label class="mdl-textfield__label" for="email">Your Email</label>
+        </div>
+        <div class="mdl-textfield mdl-js-textfield">
+          <input class="mdl-textfield__input" type="text" id="name">
+          <label class="mdl-textfield__label" for="name">Device Name (optional)</label>
+        </div>
+        <div class="mdl-textfield mdl-js-textfield">
+          <input class="mdl-textfield__input" type="text" id="description">
+          <label class="mdl-textfield__label" for="description">Device Description (optional)</label>
+        </div>
+        <button id="add" class="mdl-button mdl-js-button mdl-button--fab mdl-js-ripple-effect mdl-button--colored">
+          <i class="material-icons">add</i>
+        </button>
       </main>
 
       <footer class="mdl-mega-footer">
