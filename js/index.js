@@ -29,7 +29,7 @@
     })
     .done(function(data) {
       if (data.result === 'success') {
-        window.location = 'flash.html?id=' + data.id;
+        window.location = 'device.html?id=' + data.id;
       } else {
         alert(data.message);
       }
