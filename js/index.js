@@ -33,6 +33,9 @@
       } else {
         alert(data.message);
       }
+    })
+    .fail(function(jqXHR, textStatus) {
+      alert(textStatus);
     });
   });
 
