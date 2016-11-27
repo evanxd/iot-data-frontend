@@ -1,3 +1,3 @@
 'use strict';
 
-var SERVER_ADDRESS = '52.41.179.106';
+var SERVER_ADDRESS = '54.214.121.137';
