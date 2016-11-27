@@ -1,3 +1,3 @@
 'use strict';
 
-var SERVER_ADDRESS = '54.214.121.137';
+var SERVER_ADDRESS = 'opendata.evanxd.io';
